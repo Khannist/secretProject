@@ -31,10 +31,4 @@
  		FROM user_dt
  		WHERE userId = #{userId}
  	</select>
- 	
- 	<select id="selectFriendList" parameterType="com.web.friend.vo.FriendVO" resultType="String">
- 		SELECT subId
- 		FROM friend_dt
- 		WHERE mainId = #{mainId}
- 	</select>
 </mapper>

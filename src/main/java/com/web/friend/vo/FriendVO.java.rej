@@ -1,0 +1,11 @@
+diff a/src/main/java/com/web/friend/vo/FriendVO.java b/src/main/java/com/web/friend/vo/FriendVO.java	(rejected hunks)
+@@ -0,0 +1,9 @@
++package com.web.friend.vo;
++
++import lombok.Data;
++
++@Data
++public class FriendVO {
++	private String mainId;
++	private String subId;
++}
