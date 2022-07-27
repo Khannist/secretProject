@@ -1,13 +1,21 @@
 package com.web.db.controller;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.catalina.connector.Response;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.web.db.vo.MemberVO;
+import com.web.friend.vo.FriendVO;
 
 @RestController
 public class MemberController {
@@ -55,5 +63,11 @@ public class MemberController {
 		return mav;
 	}
 	
-	
+	@RequestMapping("/friendList")
+	public ModelAndView flt() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/friend/friendList");
+		return mav;
+	}
+
 }
