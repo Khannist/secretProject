@@ -1,7 +1,8 @@
 create table user_dt (
     userId nvarchar2(100) PRIMARY KEY,
     userPw NVARCHAR2(100),
-    name NVARCHAR2(100)  
+    name NVARCHAR2(100)
+    
 );
 
 commit;
@@ -57,59 +58,35 @@ select subId from friend_dt where mainId = 'E';
 
 
 -----------------------------------서버기록---------------------------------------------
-CREATE TABLE Channel_dt (
-    channelCode NVARCHAR2(28) PRIMARY KEY,
-    channelName NVARCHAR2(255)
-);
-select * from Channel_dt;
-select * from ChannelHasUser_dt;
-
-CREATE TABLE ChannelHasUser_dt (
-    channelCode NVARCHAR2(28),
-    userId NVARCHAR2(100),
-    CONSTRAINT fk_channelcode FOREIGN KEY(channelCode) REFERENCES Channel_dt(channelCode),
-    CONSTRAINT fk_channelHasUser FOREIGN KEY(userId) REFERENCES user_dt(userId)
-);
-
-commit;
 
 
 
 
-drop table Channel_dt;
-drop table ChannelHasUser_dt;
 -----------------------------------채팅룸기록---------------------------------------------
 CREATE TABLE roomChannel (
     roomCode NVARCHAR2(28) PRIMARY KEY,
-    roomName NVARCHAR2(255),
-    channelCode NVARCHAR2(28)
+    roomName NVARCHAR2(255)
 );
 commit;
 -- 룸코드를 가지고 있는 유저 테이블
 CREATE TABLE roomUser_dt (
     userId nvarchar2(100),
     roomCode nvarchar2(28),
-    channelCode NVARCHAR2(28),
     CONSTRAINT fk_userIdRoomChannerl FOREIGN KEY(userId) REFERENCES user_dt(userId),
-    CONSTRAINT fk_roomCdeRoomChannel FOREIGN KEY(roomCode) REFERENCES roomChannel(roomCode),
-    CONSTRAINT fk_channelcodeHasRoom FOREIGN KEY(channelCode) REFERENCES Channel_dt(channelCode)
+    CONSTRAINT fk_roomCdeRoomChannel FOREIGN KEY(roomCode) REFERENCES roomChannel(roomCode)
 );
 
-drop table roomChannel;
-drop table roomUser_dt;
+
 -----------------------------------채팅기록---------------------------------------------
 
 
 CREATE TABLE chat_dt (
     roomCode NVARCHAR2(28),
     userId NVARCHAR2(100),
-    channelCode NVARCHAR2(28),
     chatData clob,
-    chatDate TIMESTAMP
+    chatDate TIMESTAMP  
 );
 commit;
-
-drop table chat_dt;
 
 
 

@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<input type="hidden" name="userId" class="userId" value="${userId}">
 	<div class="container">
 		<h1>채팅방</h1>
 		<div id="roomContainer" class="roomContainer">

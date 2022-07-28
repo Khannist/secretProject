@@ -17,9 +17,11 @@
 		<input type="hidden" value="${mVo.userId}" id="mainId" class="mainId">
 		<input type="text" value="${mVo.userId}님 환영합니다." style="border:none;">
 		<jsp:include page="friend/friendList.jsp"></jsp:include>
-		<input type="button" value="채팅방" onclick="location.href='room'">
+		<!-- <input type="button" value="채팅방" onclick="location.href='room'"> -->
+		<jsp:include page="roomchannel/roomChannel.jsp"></jsp:include>
 		<input type="button" value="로그아웃" onclick="location.href='/'">
 		<script type="text/javascript" src="/js/friendList/friendList.js"></script>
+		<script type="text/javascript" src="/js/channel/channel.js"></script>
 	</c:when>
 	<c:otherwise>
 		<input type="button" value="로그인" onclick="location.href='login'">
