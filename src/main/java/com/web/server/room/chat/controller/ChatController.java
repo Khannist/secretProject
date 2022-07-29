@@ -1,5 +1,6 @@
 package com.web.server.room.chat.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +24,7 @@ import com.web.server.room.vo.Room;
 
 @RestController
 public class ChatController {
-	
-	List<Room> roomList = new ArrayList<Room>();
-	List<Channel> chnList = new ArrayList<Channel>();
-	static int roomNumber = 0;
-	
+
 	@Autowired
 	private SqlSession ss;
 
@@ -59,45 +56,16 @@ public class ChatController {
 	 * @return
 	 */
 	@RequestMapping("/createRoom")
-	public @ResponseBody List<Room> createRoom(@RequestParam HashMap<Object, Object> params){
-		String roomName = (String) params.get("roomName");
-		String userId = (String) params.get("userId");
+	public @ResponseBody ModelAndView createRoom(Room room){
+		ModelAndView mav = new ModelAndView();
+		String roomName = room.getRoomName();
+		
 		if(roomName != null && !roomName.trim().equals("")) {
-			Room room = new Room();
-			String roomCode = RandomStringUtils.randomAlphanumeric(8);
-			System.out.println(roomCode);
-			
-			room.setRoomCode(roomCode);
-			room.setRoomNumber(++roomNumber);
-			room.setRoomName(roomName);
-			room.setUserId(userId);
-			roomList.add(room);
-			ss.insert("ChatMapper.insertChatRoom", room);
-			ss.insert("AddChatRoom", room);
-			
-			System.out.println("방생성 = " + roomList);
-		}
-		return roomList;
-	}
-	/*
-	 * 채널 생성
-	 * 
-	 */
-	@RequestMapping("/createChannel")
-	public @ResponseBody List<Channel> createChannel(@RequestParam HashMap<Object, Object> params){
-		String channelName = (String) params.get("channelName");
-		String userId = (String) params.get("userId");
-		if(channelName != null && !channelName.trim().equals("")) {
-			Channel chn = new Channel();
-			String channelCode = "";
-			
-			//동일한 코드가 있는지 계속 반복
+			String roomCode = "";
 			Boolean flag = true;
 			while(flag) {
-				channelCode = RandomStringUtils.randomAlphanumeric(8);
-				System.out.println("channelCode = " + channelCode);
-				String tempCode = ss.selectOne("ChatMapper.checkSameChannelCode", channelCode);
-				System.out.println("tempCode = " + tempCode);
+				roomCode = RandomStringUtils.randomAlphanumeric(8);
+				String tempCode = ss.selectOne("ChatMapper.checkSameChannelCode", roomCode);
 				if(tempCode == null) {
 					flag = false;			
 				}
@@ -105,91 +73,63 @@ public class ChatController {
 			
 			
 			
-			chn.setChannelCode(channelCode);
-			chn.setChannelName(channelName);
-			chn.setUserId(userId);
+			System.out.println(roomCode);
+			room.setRoomCode(roomCode);
+			ss.insert("ChatMapper.insertChatRoom", room);
+			List<Room> roomList = ss.selectList("ChatMapper.checkSameRoomList", room);
+			int num = 0;
+			if(roomList.toString().length() > 0) {
+				for(Room tempListnum : roomList) {
+					int tnum = Integer.parseInt(tempListnum.getRoomList().substring(room.getUserId().toString().length()+1));
+					if(tnum == num) {
+						num++;
+					}else {
+						break;						
+					}
+				}				
+			}
+			room.setRoomList(room.getUserId()+"_"+num);
+			ss.insert("ChatMapper.AddChatRoom", room);
+			mav.addObject("room", room);
 			
-			int a = ss.insert("ChatMapper.createChatChannel", chn);
-			System.out.println("채널생성 = " + a);
-			System.out.println("채널생성후 채널코드 = " + chn.getChannelCode());
-			a = ss.insert("ChatMapper.AddChatChannel", chn);
-			System.out.println("채널생성2 = " + a);
-			
-			System.out.println("채널생성 = " + chnList);
 		}
-		return chnList;
+		mav.setViewName("forward:/getRoom");
+		return mav;
+		
+		
 	}
-	
+
 	/**
 	 * 방 정보가져오기
 	 * @param params
 	 * @return
 	 */
 	@RequestMapping("/getRoom")
-	public @ResponseBody ModelAndView getRoom(@RequestParam HashMap<Object, Object> params){
-		ModelAndView mav = new ModelAndView();
-		String userId = (String) params.get("userId");
-		// 서버 값을 받아와 서버값으로 채팅방 리스트 나열
-		String channelCode = (String) params.get("channelCode");
-		Room room = new Room();
-		
-		room.setUserId(userId);
-		room.setChannelCode(channelCode);
-		List<Room> list = ss.selectList("ChatMapper.getChatChannel", room);
-		
-		mav.addObject("list", list);
-		
-		
-		
-		System.out.println("겟룸 = " + roomList);
-		return mav;
-	}
-	
-	/**
-	 * 채널 정보가져오기
-	 * @param params
-	 * @return
-	 */
-	@RequestMapping("/getChannel")
-	public @ResponseBody void getChannel(HttpServletResponse res,@RequestParam HashMap<Object, Object> params) throws Exception{
+	public @ResponseBody void getRoom(HttpServletResponse res, Room room) throws Exception{
 		Gson gson = new Gson();
 		Map<String, Object> data = new HashMap<String, Object>();
-		
-		String userId = (String) params.get("userId");
-		Channel chn = new Channel();
-		System.out.println("채널 유저아이디 = " + userId);
-		
-		chn.setUserId(userId.trim());
-		System.out.println("채널 리스트 생성전");
-		
-		List<Channel> list = ss.selectList("ChatMapper.getChatChannel", chn);
-		
-		System.out.println("채널 리스트생성 = " + list);
-		System.out.println("채널 리스트길이 = " + list.size());
+		List<Room> list = ss.selectList("ChatMapper.getChatChannel", room);
 		
 		if(list.size() > 0) {
 			data.put("list", list);
-			System.out.println("리스트 오브젝트 추가");
 		}
 		
-		System.out.println("겟채널 = " + chnList);
-		System.out.println("모델뷰 값 = " + gson.toJson(data));
+		System.out.println("Json 값 = " + gson.toJson(data));
 		res.getWriter().print(gson.toJson(data));
 	}
-	
 	/**
 	 * 채팅방
 	 * @return
 	 */
 	@RequestMapping("/moveChating")
-	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
+	public ModelAndView chating(Room room) {
 		ModelAndView mv = new ModelAndView();
-		String roomCode =((String) params.get("roomCode"));
-		
+		String roomCode = room.getRoomCode();
+		List<Room> roomList = ss.selectList("ChatMapper.checkSameRoomList", room.getUserId());
 		List<Room> new_list = roomList.stream().filter(o->o.getRoomCode()==roomCode).collect(Collectors.toList());
 		if(new_list != null && new_list.size() > 0) {
-			mv.addObject("roomName", params.get("roomName"));
-			mv.addObject("roomCode", params.get("roomCode"));
+			mv.addObject("roomName", room.getRoomName());
+			mv.addObject("roomCode", room.getRoomCode());
 			System.out.println("모델뷰 = " + mv);
 			mv.setViewName("chat/chat");
 		}else {
@@ -197,4 +137,98 @@ public class ChatController {
 		}
 		return mv;
 	}
+
+
+	/*
+	 * 채널 생성
+	 * 
+	 */
+	@RequestMapping("/createChannel")
+	public @ResponseBody ModelAndView createChannel(Channel chn){
+		ModelAndView mav = new ModelAndView();
+		
+		if(chn.getChannelName() != null && !chn.getChannelName().trim().equals("")) {
+			String channelCode = "";
+			
+			//동일한 코드가 있는지 계속 반복
+			Boolean flag = true;
+			while(flag) {
+				channelCode = RandomStringUtils.randomAlphanumeric(8);
+				String tempCode = ss.selectOne("ChatMapper.checkSameChannelCode", channelCode);
+				if(tempCode == null) {
+					flag = false;			
+				}
+			}
+			
+			chn.setChannelCode(channelCode);
+			
+			int a = ss.insert("ChatMapper.createChatChannel", chn);
+			List<Channel> chnList = ss.selectList("ChatMapper.checkSameChannelList", chn);
+			
+			// 채널 리스트 순서 로직
+			int num = 0;
+			if(chnList.toString().length() > 0) {
+				for(Channel tempListnum : chnList) {
+					int tnum = Integer.parseInt(tempListnum.getChannelList().substring(chn.getUserId().toString().length()+1));
+					if(tnum == num) {
+						num++;
+					}else {
+						break;						
+					}
+				}				
+			}
+			chn.setChannelList(chn.getUserId()+"_"+num);
+			a = ss.insert("ChatMapper.AddChatChannel", chn);
+			mav.addObject("chn", chn);
+		
+		}
+		mav.setViewName("forward:getChannel");
+		return mav;
+	}
+	
+	
+	/**
+	 * 채널 정보가져오기
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping("/getChannel")
+	public @ResponseBody void getChannel(HttpServletResponse res,Channel chn) throws Exception{
+		Gson gson = new Gson();
+		Map<String, Object> data = new HashMap<String, Object>();
+
+		
+		List<Channel> list = ss.selectList("ChatMapper.getChatChannel", chn);
+
+		
+		if(list.size() > 0) {
+			data.put("list", list);
+		}
+		
+		System.out.println("Json 값 = " + gson.toJson(data));
+		res.getWriter().print(gson.toJson(data));
+	}
+	/**
+	 * 채팅방
+	 * @return
+	 */
+	@RequestMapping("/moveRoom")
+	public ModelAndView moveRoom(Channel chn) {
+		ModelAndView mv = new ModelAndView();
+		String channelCode = chn.getChannelCode();
+		List<Channel> chnList = ss.selectList("ChatMapper.checkSameChannelList", chn.getUserId());
+		List<Channel> new_list = chnList.stream().filter(o->o.getChannelCode()==channelCode).collect(Collectors.toList());
+		if(new_list != null && new_list.size() > 0) {
+			mv.addObject("channelName", chn.getChannelName());
+			mv.addObject("channelCode", chn.getChannelCode());
+			System.out.println("모델뷰 = " + mv);
+			mv.setViewName("room/room");
+		}else {
+			mv.addObject("userId", chn.getUserId());
+			mv.setViewName("forward:/");
+		}
+		return mv;
+	}
 }
+
+	

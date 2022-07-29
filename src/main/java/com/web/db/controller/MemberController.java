@@ -1,7 +1,5 @@
 package com.web.db.controller;
 
-
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,23 +24,6 @@ public class MemberController {
 		}
 		mav.setViewName("/index");
 		
-		//자동 난수생성 숫자+알파벳
-		String generatedString = RandomStringUtils.randomAlphanumeric(4);
-		System.out.println(generatedString);
-		generatedString = RandomStringUtils.randomAlphanumeric(4);
-		System.out.println(generatedString);
-		generatedString = RandomStringUtils.randomAlphanumeric(4);
-		System.out.println(generatedString);
-		generatedString = RandomStringUtils.randomAlphanumeric(4);
-		System.out.println(generatedString);
-		generatedString = RandomStringUtils.randomAlphanumeric(4);
-		System.out.println(generatedString);
-		generatedString = RandomStringUtils.randomAlphanumeric(4);
-		System.out.println(generatedString);
-		generatedString = RandomStringUtils.randomAlphanumeric(4);
-		System.out.println(generatedString);
-		
-		
 		return mav;
 	}
 	
@@ -56,9 +37,7 @@ public class MemberController {
 	@RequestMapping("/loginCheck")
 	public ModelAndView loginCheck(MemberVO mVo) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("mVo.getId = " + mVo.getUserId());
 		MemberVO tempVo = ss.selectOne("ChatMapper.loginCheck", mVo);
-		System.out.println("tempVo.length = " + String.valueOf(tempVo));
 		if(String.valueOf(tempVo).equals("null")) {
 			mav.addObject("msg", "존재하지 않는 아이디 입니다.");
 		}else {
@@ -66,11 +45,23 @@ public class MemberController {
 				mav.addObject("msg", "로그인에 실패했습니다.");
 			}else {
 				mav.addObject(mVo);
-				mav.setViewName("forward:/");
+				mav.setViewName("forward:/ServerPage");
 				return mav;
 			}
 		}
 		mav.setViewName("login/loginForm");
+		return mav;
+	}
+	@RequestMapping("/ServerPage")
+	public ModelAndView serverPage(MemberVO mVo) {
+		ModelAndView mav = new ModelAndView();
+if(mVo.getUserId() == null) {
+			
+		}else {
+			mav.addObject("mVo", mVo);
+		}
+		mav.setViewName("/ServerPage");
+		
 		return mav;
 	}
 	

@@ -39,11 +39,11 @@ function createChatingRoom(res){
 		res.forEach(function(d, idx){
 			var rn = d.roomName.trim();
 			console.log("d.roomCode = " + d.roomCode);
-			tag += "<tr>"+
-						"<td class='num' value='"+d.roomCode+"'>"+(idx+1)+"</td>"+
-						"<td class='room'>"+ rn +"</td>"+
-						"<td class='go'><button type='button' onclick='goRoom(\""+d.roomCode+"\", \""+rn+"\")'>참여</button></td>" +
-					"</tr>";	
+			tag += "<li>"+
+						"<p class='go' value='"+d.roomCode+"'>"+
+							"<a onclick='goRoom(\""+d.roomCode+"\", \""+rn+"\">" + rn + "</a>" +
+						"</p>"+
+					"</li>";
 		});
 		$("#roomList").empty().append(tag);
 	}

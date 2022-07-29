@@ -9,21 +9,18 @@
 <meta charset="UTF-8">
 <style type="text/css">
 	#addChannel {
-		width: 250px;
-		height: 250px;
-		border: 1px solid black;
-		background: black;
-	}
-	#channelSpace div {
-		width: 100px;
-		height: 100px;
-		border: 1px solid black;
+		display: inline-block;
 	}
 	#channelNameInput {
-		width: 200px;
-		height: 60px;
+		width: 100px;
 		border: 1px solid black;
 		display: none;
+	}
+	input#channelName {
+		width: 100px;
+	}
+	#channelSpace li{
+		overflow: hidden;
 	}
 }
 
@@ -32,13 +29,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="channelSpace"></div>
-	
-	
-	<div id="addChannel" class="addChannel" onclick="createServer()"></div>
+	<ul id="channelSpace">
+  
+	</ul>
+	<div class="add">
+		<p>
+			<a id="addChannel" onclick="createServer()">Add</a>
+		</p>
+	</div>
 	<div id="channelNameInput">
-		<input type="text" name="channelName" id="channelName">
-		<input type="button" value="생성" name="channelCreate" id="channelCreate" onclick="channelCreateName()">
+		<input type="text" name="channelName" id="channelName" onkeyup="enterkey()">
 	</div>
 	
 

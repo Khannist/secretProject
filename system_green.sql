@@ -62,19 +62,25 @@ CREATE TABLE Channel_dt (
     channelName NVARCHAR2(255)
 );
 select * from Channel_dt;
-select * from ChannelHasUser_dt;
+select * from ChannelHasUser_dt ORDER BY channelList DESC;
 
 CREATE TABLE ChannelHasUser_dt (
+    channelList nvarchar2(255),
     channelCode NVARCHAR2(28),
     userId NVARCHAR2(100),
+    channelName nvarchar2(255),
     CONSTRAINT fk_channelcode FOREIGN KEY(channelCode) REFERENCES Channel_dt(channelCode),
     CONSTRAINT fk_channelHasUser FOREIGN KEY(userId) REFERENCES user_dt(userId)
 );
 
 commit;
 
+delete from channel_dt;
+delete from ChannelHasUser_dt;
 
-
+SELECT * FROM ChannelHasUser_dt
+ 		WHERE  userId = 'A'
+ 		ORDER BY length(channelList) ASC,channelList ASC;
 
 drop table Channel_dt;
 drop table ChannelHasUser_dt;
@@ -87,7 +93,9 @@ CREATE TABLE roomChannel (
 commit;
 -- 룸코드를 가지고 있는 유저 테이블
 CREATE TABLE roomUser_dt (
+    roomList nvarchar2(255),
     userId nvarchar2(100),
+    roomName NVARCHAR2(255),
     roomCode nvarchar2(28),
     channelCode NVARCHAR2(28),
     CONSTRAINT fk_userIdRoomChannerl FOREIGN KEY(userId) REFERENCES user_dt(userId),

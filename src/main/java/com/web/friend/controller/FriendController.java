@@ -30,11 +30,7 @@ public class FriendController {
 		Gson gson = new Gson();
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<String> list = null;
-		
-		
-		String name = fVo.getMainId();
-		//System.out.println("mainId1 = " + fVo.getMainId());
-		//System.out.println("mainId2 = " + name);
+
 		
 		list = ss.selectList("ChatMapper.selectFriendList", fVo.getMainId());
 		

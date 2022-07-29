@@ -3,66 +3,61 @@
  */
  var ws;
 window.onload = function() {
-	console.log("로딩");
 	getChannel();
-	console.log("겟채널로딩");
 	createServer();
-	console.log("크리에이트서버 로딩");
 }
 
 function getChannel(){
 	var msg = { userId : $('#userId').val()	};
-	console.log("문제점 찾기");
 	commonAjax('/getChannel', msg , 'post', function(result){
 		createChatingChannel(result);
 	});
 }
-
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    	var con = document.getElementById("channelNameInput");
+    	if(con.style.display == 'inline-block')
+    		channelCreateName();
+    }
+}
 function createServer(){
 	$("#addChannel").click(function(){
-		 var con = document.getElementById("channelNameInput");
-        con.style.display = (con.style.display != 'none') ? "none" : "block";
+		var con = document.getElementById("channelNameInput");
+        con.style.display = (con.style.display != 'none') ? "none" : "inline-block";
+        con.style.display != 'none' ? $("#channelName").focus(): '';
 	});
 }
 		
 function channelCreateName(){
-	$("#channelCreate").click(function(){
-		console.log("채널생성 준비");
-		var msg = {
-			channelName : $('#channelName').val(),
-			userId : $('#userId').val()
-		};
-		console.log("채널 생성 msg = " + msg);
-		commonAjax('/createChannel', msg, 'post', function(result){
-			createChatingChannel(result);
-		});
-		console.log("여긴가?");
-		$("#channelName").val("");
-		createServer().click;
+	var msg = {
+		channelName : $('input#channelName').val(),
+		userId : $('#userId').val()
+	};
+	commonAjax('/createChannel', msg, 'post', function(result){
+		createChatingChannel(result);
 	});
+	$("#addChannel").click();
+	$("#addChannel").click();
+	$("#channelName").val("");
 }
 		
 
 
 function goChannel(code, name){
-	//location.href="/moveChannel?channelName="+name+"&"+"channelCode="+code;
+	location.href="/moveRoom?channelName="+name+"&"+"channelCode="+code;
 }
 
 function createChatingChannel(res){
-	console.log("res = " + res);
-	console.log(Object.keys(res).length);
-	console.log("Object.keys(res) = " + Object.keys(res));
-	console.log(res.list);
-	console.log(res.list[0].channelCode);
 	if(res != null){
 		var tag = "";
 		res.list.forEach(function(d, idx){
 			var cn = d.channelName;
-			console.log("d.channelCode = " + d.channelCode);
-			tag += "<div onclick='goChannel(\""+d.channelCode+"\", \""+cn+"\")'>"+
-						"<input type='hidden' value='"+d.channelCode+"'>"+
-						"<span id='channelName' name='channelName' value='cn'>"+
-					"</div>";	
+			tag += "<li onclick='goChannel(\""+d.channelCode+"\", \""+cn+"\")'>"+
+						"<p type='hidden' value='"+d.channelCode+"'>"+
+							"<img src='' alt='' id='channelName' name='channelName'>"+ cn + "</img>" + 
+						"</p>" +
+					"</li>";	
 		});
 		$("#channelSpace").empty().append(tag);
 	}
@@ -73,7 +68,7 @@ function commonAjax(url, parameter, type, calbak, contentType){
 		url: url,
 		data: parameter,
 		type: type,
-		contentType : contentType!=null?contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+		contentType :'application/x-www-form-urlencoded; charset=UTF-8',
 		success: function (res) {
 			res = JSON.parse(res);
 			calbak(res);
