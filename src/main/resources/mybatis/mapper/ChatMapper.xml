@@ -31,4 +31,71 @@
  		FROM user_dt
  		WHERE userId = #{userId}
  	</select>
+ 	<!-- 친구 리스트 -->
+ 	<select id="selectFriendList" parameterType="com.web.friend.vo.FriendVO" resultType="String">
+ 		SELECT subId
+ 		FROM friend_dt
+ 		WHERE mainId = #{mainId}
+ 	</select>
+ 	
+ 	<!-- 룸 쿼리 -->
+ 	<select id="checkSameRoomCode" parameterType="String" resultType="String">
+ 		SELECT roomCode FROM roomChannel
+ 		WHERE roomCode = #{roomCode}
+ 	</select>
+ 	
+ 	<select id="checkSameRoomList" parameterType="com.web.server.room.vo.Room" resultType="com.web.server.room.vo.Room">
+ 		SELECT roomList
+ 		FROM roomUser_dt
+ 		WHERE userId = #{userId}
+ 		ORDER BY length(roomList) ASC,roomList ASC
+ 	</select>
+ 	
+ 	<insert id="insertChatRoom" parameterType="com.web.server.room.vo.Room">
+ 		INSERT INTO roomChannel
+ 		VALUES(#{roomCode},#{roomName},#{channelCode})
+ 	</insert>
+ 	
+ 	<insert id="AddChatRoom" parameterType="com.web.server.room.vo.Room">
+ 		INSERT INTO roomUser_dt
+ 		VALUES(#{roomList},#{userId},#{roomName},#{roomCode},#{channelCode})
+ 	</insert>
+ 	
+ 	<select id="getChatRoom" parameterType="com.web.server.room.vo.Room" resultType="com.web.server.room.vo.Room">
+ 		SELECT * FROM roomUser_dt
+ 		WHERE channelCode = #{channelCode} AND userId = #{userId}
+ 		ORDER BY length(roomList) ASC,roomList ASC
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 채널 -->
+ 	<select id="checkSameChannelCode" parameterType="String" resultType="String">
+ 		SELECT channelCode FROM channel_dt
+ 		WHERE channelCode = #{channelCode}
+ 	</select>
+ 	<select id="checkSameChannelList" parameterType="com.web.server.room.vo.Channel" resultType="com.web.server.room.vo.Channel">
+ 		SELECT channelList
+ 		FROM ChannelHasUser_dt
+ 		WHERE userId = #{userId}
+ 		ORDER BY length(channelList) ASC,channelList ASC
+ 	</select>
+ 	
+ 	<insert id="createChatChannel" parameterType="com.web.server.room.vo.Channel">
+ 		INSERT INTO channel_dt
+ 		VALUES(#{channelCode},#{channelName})
+ 	</insert>
+ 	<insert id="AddChatChannel" parameterType="com.web.server.room.vo.Channel">
+ 		INSERT INTO ChannelHasUser_dt
+ 		VALUES(#{channelList},#{channelCode}, #{userId}, #{channelName})
+ 	</insert>
+ 	<select id="getChatChannel" parameterType="com.web.server.room.vo.Channel" resultType="com.web.server.room.vo.Channel">
+ 		SELECT * FROM ChannelHasUser_dt
+ 		WHERE  userId = #{userId}
+ 		ORDER BY length(channelList) ASC,channelList ASC
+ 	</select>
 </mapper>

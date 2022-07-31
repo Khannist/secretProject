@@ -10,11 +10,14 @@
 <title>CHAT ROOM</title>
 </head>
 <body>
-	<div id="container" class="container">
-		<h1>채팅</h1>
+<div id="container" class="container">
+		<h1>${roomName}의 채팅방</h1>
 		<input type="hidden" id="sessionId" value="">
+		<input type="hidden" id="roomNumber" value="${roomNumber}">
+		
 		<div id="chating" class="chating">
 		</div>
+		
 		<div id="yourName">
 			<table class="inputTable">
 				<tr>

@@ -3,10 +3,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
+	<input type="hidden" name="userId" class="userId" value="${userId}">
+	<ul id="roomList">
+    </ul>
+    <div id="addViewRoom">
+    		Add
+    </div>
+    <div>
+    	<input type="text" name="roomName" id="roomName">
+		<button id="createRoom">방 만들기</button>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<div class="container">
 		<h1>채팅방</h1>
 		<div id="roomContainer" class="roomContainer">
@@ -22,5 +44,6 @@
 			</table>
 		</div>
 	</div>
+	<script type="text/javascript" src="/js/room/room.js"></script>
 </body>
 </html>

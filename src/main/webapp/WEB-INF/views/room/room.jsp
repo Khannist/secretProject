@@ -4,26 +4,21 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link  rel="stylesheet" type="text/css" href="/css/room/room.css">
 <meta charset="UTF-8">
-<link href="/css/room/room.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
-		<h1>채팅방</h1>
-		<div id="roomContainer" class="roomContainer">
-			<table id="roomList" class="roomList"></table>
-		</div>
-		<div>
-			<table class="inputTable">
-				<tr>
-					<th>방 제목</th>
-					<th><input type="text" name="roomName" id="roomName"></th>
-					<th><button id="createRoom">방 만들기</button></th>
-				</tr>
-			</table>
-		</div>
+	<input type="hidden" name="userId" class="userId" value="${userId}">
+	<ul id="roomList">
+    </ul>
+    <div id="addViewRoom" onclick="createRoom()">
+    	<p>
+    		<a>Add</a>
+    	</p>
+    </div>
+    <div id="inputNameSpace">
+    	<input type="text" name="roomName" id="roomName" onkeyup="enterKey()">
 	</div>
-	<script type="text/javascript" src="/js/room/room.js"></script>
+	
 </body>
 </html>

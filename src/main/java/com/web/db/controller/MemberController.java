@@ -1,6 +1,5 @@
 package com.web.db.controller;
 
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +10,7 @@ import com.web.db.vo.MemberVO;
 
 @RestController
 public class MemberController {
+	
 	@Autowired
 	private SqlSession ss;
 	
@@ -24,6 +24,7 @@ public class MemberController {
 			mav.addObject("mVo", mVo);			
 		}
 		mav.setViewName("/index");
+		
 		return mav;
 	}
 	
@@ -37,9 +38,7 @@ public class MemberController {
 	@RequestMapping("/loginCheck")
 	public ModelAndView loginCheck(MemberVO mVo) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("mVo.getId = " + mVo.getUserId());
 		MemberVO tempVo = ss.selectOne("ChatMapper.loginCheck", mVo);
-		System.out.println("tempVo.length = " + String.valueOf(tempVo));
 		if(String.valueOf(tempVo).equals("null")) {
 			mav.addObject("msg", "존재하지 않는 아이디 입니다.");
 		}else {
@@ -47,11 +46,23 @@ public class MemberController {
 				mav.addObject("msg", "로그인에 실패했습니다.");
 			}else {
 				mav.addObject(mVo);
-				mav.setViewName("forward:/");
+				mav.setViewName("forward:/ServerPage");
 				return mav;
 			}
 		}
 		mav.setViewName("login/loginForm");
+		return mav;
+	}
+	@RequestMapping("/ServerPage")
+	public ModelAndView serverPage(MemberVO mVo) {
+		ModelAndView mav = new ModelAndView();
+if(mVo.getUserId() == null) {
+			
+		}else {
+			mav.addObject("mVo", mVo);
+		}
+		mav.setViewName("/ServerPage");
+		
 		return mav;
 	}
 	
