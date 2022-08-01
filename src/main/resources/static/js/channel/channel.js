@@ -44,6 +44,7 @@ function channelCreateName(){
 
 
 function goChannel(code, name, id){
+	$("#roomList").empty();
 	var msg = {
 		channelCode : code,
 		channelName : name,

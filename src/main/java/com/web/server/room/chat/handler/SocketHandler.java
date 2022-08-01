@@ -29,11 +29,14 @@ public class SocketHandler extends TextWebSocketHandler{
 		String msg = message.getPayload();
 		JSONObject obj = jsonToObjectParser(msg);
 		
-		String rN = (String) obj.get("roomNumber");
+		System.out.println("msg = " + msg);
+		System.out.println("obj = " + obj);
+		
+		String rN = (String) obj.get("roomCode");
 		HashMap<String, Object> temp = new HashMap<String, Object>();
 		if(rls.size() > 0) {
 			for(int i=0; i<rls.size(); i++) {
-				String roomNumber = (String) rls.get(i).get("roomNumber"); //세션리스트의 저장된 방번호를 가져와서
+				String roomNumber = (String) rls.get(i).get("roomCode"); //세션리스트의 저장된 방번호를 가져와서
 				if(roomNumber.equals(rN)) { //같은값의 방이 존재한다면
 					temp = rls.get(i); //해당 방번호의 세션리스트의 존재하는 모든 object값을 가져온다.
 					break;

@@ -63,7 +63,7 @@
         .Midbar ul{
             list-style: none;
         }
-        .Midbar ul li{
+        .Midbar ul li, #addViewRoom{
             float: left;
             border: 0.5px solid;
             background-color: #495C83;
@@ -73,11 +73,11 @@
             color: white;
             cursor: pointer;
         }
-        .Midbar ul li p{
+        .Midbar ul li p, #addViewRoom p{
             padding-top: 6px;
             padding-left: 10px;
         }
-        .Midbar ul li a{
+        .Midbar ul li a, #addViewRoom a{
             text-decoration: none;
             color: white;
             padding-left: 23px;

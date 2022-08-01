@@ -10,6 +10,7 @@
 <body>
 <div class="container"> 
 		<input type="hidden" name="userId" id="userId" value="${mVo.userId}">
+		<input type="hidden" name="channelCode" id="channelCode">
         <header>
             <img src="img/superMarch.PNG" alt="로고" id="Logo" onclick="location.href='/MAIN'">
             <nav>
@@ -48,6 +49,7 @@
         	 document.querySelector('.MainChatRoom').style.display = "block";
         } */
     </script>
+    <script type="text/javascript" src="/js/room/room.js"></script>
     <script type="text/javascript" src="/js/channel/channel.js"></script>
 </body>
 </html>

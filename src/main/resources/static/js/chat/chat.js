@@ -1,8 +1,48 @@
 var ws;
 
+function getChat(res) {
+	console.log("getChat.res = " + JSON.stringify(res));
+	var msg = { 
+		name : $("#name").val(),
+		userId : $('#userId').val(),
+		channelCode : res.channelCode,
+		roomCode : res.roomCode
+			};
+	commonAjax('/getChat', msg , 'post', function(result){
+		createChat(result);
+	});
+}
+
+function createChat(res) {
+	if(res != null){
+		//console.log("res = " + JSON.stringify(res));
+		console.log("res.list = " + res.list);
+		console.log("res[0] = " + res[0]);
+		console.log("res.list[0].userId = " + res.list[0].userId);
+		console.log("res.length = " + res.list[0].roomCode);
+		var tag = "";
+		if(res.list.length >= 1) {
+			$("#roomCode").val(res.list[0].roomCode);
+		}
+		res.list.forEach(function(d, idx){
+			console.log("d.roomCode = " + d.roomCode);
+			if(d.userId == $("#userId")){
+				tag +=  "<p class='me'>나 :" + d.chatData + "</p>";
+			}else {
+				tag += "<p class='others'>" + d.name + " :" + d.chatData + "</p>";
+			}
+		});
+		$("#chating").empty().append(tag);
+	}
+}
+
+
+
+
+
 function wsOpen(){
 	//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
-	ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomNumber").val());
+	ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomCode").val());
 	wsEvt();
 }
 	
@@ -41,26 +81,23 @@ function wsEvt() {
 	});
 }
 
-function chatName(){
-	var userName = $("#userName").val();
-	if(userName == null || userName.trim() == ""){
-		alert("사용자 이름을 입력해주세요.");
-		$("#userName").focus();
-	}else{
-		wsOpen();
-		$("#yourName").hide();
-		$("#yourMsg").show();
-	}
-}
 
 function send() {
-	var option ={
-		type: "message",
-		roomNumber: $("#roomNumber").val(),
-		sessionId : $("#sessionId").val(),
-		userName : $("#userName").val(),
-		msg : $("#chatting").val()
-	}
-	ws.send(JSON.stringify(option))
-	$('#chatting').val("");
+	document.addEventListener("keypress", function(e){
+		if(e.keyCode == 13){ //enter press
+			console.log("센드 보낸다!");
+			var option ={
+				type: "message",
+				roomNumber: $("#roomNumber").val(),
+				sessionId : $("#sessionId").val(),
+				userId : $("#userId").val(),
+				roomCode : $("#roomCode").val(),
+				channelCode : $("#channelCode").val(),
+				msg : $("#chatting").val()
+			}
+			ws.send(JSON.stringify(option));
+			$('#chatting').val("");
+		}
+	});
+	
 }

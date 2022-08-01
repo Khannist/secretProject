@@ -47,7 +47,7 @@
  	<select id="checkSameRoomList" parameterType="com.web.server.room.vo.Room" resultType="com.web.server.room.vo.Room">
  		SELECT roomList
  		FROM roomUser_dt
- 		WHERE userId = #{userId}
+ 		WHERE channelCode = #{channelCode}
  		ORDER BY length(roomList) ASC,roomList ASC
  	</select>
  	
@@ -98,4 +98,26 @@
  		WHERE  userId = #{userId}
  		ORDER BY length(channelList) ASC,channelList ASC
  	</select>
+ 	
+ 	
+ 	<select id="getChat" parameterType="com.web.server.room.vo.Chat" resultType="com.web.server.room.vo.Chat">
+ 		SELECT * FROM chat_dt
+ 		WHERE channelCode = #{channelCode}
+ 		AND roomCode = #{roomCode}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 </mapper>

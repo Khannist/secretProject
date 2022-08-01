@@ -88,7 +88,7 @@ drop table ChannelHasUser_dt;
 CREATE TABLE roomChannel (
     roomCode NVARCHAR2(28) PRIMARY KEY,
     roomName NVARCHAR2(255),
-    channelCode NVARCHAR2(28)
+    channelCode NVARCHAR2(30)
 );
 commit;
 -- 룸코드를 가지고 있는 유저 테이블
@@ -96,7 +96,7 @@ CREATE TABLE roomUser_dt (
     roomList nvarchar2(255),
     userId nvarchar2(100),
     roomName NVARCHAR2(255),
-    roomCode nvarchar2(28),
+    roomCode nvarchar2(30),
     channelCode NVARCHAR2(28),
     CONSTRAINT fk_userIdRoomChannerl FOREIGN KEY(userId) REFERENCES user_dt(userId),
     CONSTRAINT fk_roomCdeRoomChannel FOREIGN KEY(roomCode) REFERENCES roomChannel(roomCode),
@@ -105,6 +105,9 @@ CREATE TABLE roomUser_dt (
 select * from roomUser_dt;
 select * from roomChannel;
 
+delete from roomChannel;
+delete from roomUser_dt;
+
 drop table roomChannel;
 drop table roomUser_dt;
 -----------------------------------채팅기록---------------------------------------------
@@ -112,6 +115,7 @@ drop table roomUser_dt;
 
 CREATE TABLE chat_dt (
     roomCode NVARCHAR2(28),
+    name NVARCHAR2(100) ,
     userId NVARCHAR2(100),
     channelCode NVARCHAR2(28),
     chatData clob,

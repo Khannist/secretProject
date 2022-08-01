@@ -25,7 +25,6 @@ function createServer(){
 	$("#addChannel").click(function(){
 		var con = document.getElementById("channelNameInput");
         con.style.display = (con.style.display != 'none') ? "none" : "inline-block";
-        con.style.display != 'none' ? $("#channelName").focus(): '';
 	});
 }
 		
@@ -37,15 +36,28 @@ function channelCreateName(){
 	commonAjax('/createChannel', msg, 'post', function(result){
 		createChatingChannel(result);
 	});
-	$("#addChannel").click();
-	$("#addChannel").click();
-	$("#channelName").val("");
+	$("div#addChannel").click();
+	$("div#addChannel").click();
+	$("input#channelName").val("");
 }
 		
 
 
-function goChannel(code, name){
-	location.href="/moveRoom?channelName="+name+"&"+"channelCode="+code;
+function goChannel(code, name, id){
+	var msg = {
+		channelCode : code,
+		channelName : name,
+		userId : id
+	}
+	
+	//location.href="/moveRoom?channelName="+name+"&"+"channelCode="+code+"&userId="+id;
+	
+	$("#channelCode").val(code);
+	
+	commonAjax('/moveRoom', msg, 'post', function(result){
+		getRoom(result);
+	});
+	
 }
 
 function createChatingChannel(res){
@@ -53,7 +65,7 @@ function createChatingChannel(res){
 		var tag = "";
 		res.list.forEach(function(d, idx){
 			var cn = d.channelName;
-			tag += "<li onclick='goChannel(\""+d.channelCode+"\", \""+cn+"\")'>"+
+			tag += "<li onclick='goChannel(\""+d.channelCode+"\", \""+cn+"\",\""+d.userId+"\")'>"+
 						"<p type='hidden' value='"+d.channelCode+"'>"+
 							"<img src='' alt='' id='channelName' name='channelName'>"+ cn + "</img>" + 
 						"</p>" +

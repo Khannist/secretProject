@@ -39,8 +39,8 @@
  	</select>
  	
  	<!-- 룸 쿼리 -->
- 	<select id="checkSameChannelCode" parameterType="String" resultType="String">
- 		SELECT roomChannel FROM channel_dt
+ 	<select id="checkSameRoomCode" parameterType="String" resultType="String">
+ 		SELECT roomCode FROM roomChannel
  		WHERE roomCode = #{roomCode}
  	</select>
  	
@@ -66,6 +66,12 @@
  		WHERE channelCode = #{channelCode} AND userId = #{userId}
  		ORDER BY length(roomList) ASC,roomList ASC
  	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	
  	<!-- 채널 -->
  	<select id="checkSameChannelCode" parameterType="String" resultType="String">

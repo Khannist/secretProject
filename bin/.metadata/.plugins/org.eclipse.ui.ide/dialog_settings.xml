@@ -22,7 +22,15 @@
 		<item value="org.eclipse.m2e.feature:1.20.1.20220227-1319"/>
 		<item value="org.eclipse.m2e.logback.feature:1.17.2.20211002-1029"/>
 		<item value="org.eclipse.m2e.wtp.feature:1.4.4.20201128-1705"/>
+		<item value="org.eclipse.mylyn.commons.identity:1.16.0.v20170629-1728"/>
+		<item value="org.eclipse.mylyn.commons.notifications:1.16.0.v20170629-1728"/>
+		<item value="org.eclipse.mylyn.commons.repositories:1.16.0.v20170629-1728"/>
+		<item value="org.eclipse.mylyn.commons:3.24.0.v20180613-1658"/>
+		<item value="org.eclipse.mylyn.context_feature:3.24.0.v20170629-2230"/>
+		<item value="org.eclipse.mylyn.discovery:3.24.0.v20170629-1728"/>
+		<item value="org.eclipse.mylyn.monitor:3.24.0.v20170629-1728"/>
 		<item value="org.eclipse.mylyn.wikitext.editors_feature:3.0.42.202201072301"/>
+		<item value="org.eclipse.mylyn_feature:3.24.0.v20180227-0955"/>
 		<item value="org.eclipse.pde:3.14.1200.v20220607-0700"/>
 		<item value="org.eclipse.platform:4.24.0.v20220607-0700"/>
 		<item value="org.eclipse.rcp:4.24.0.v20220607-0700"/>
@@ -32,6 +40,8 @@
 		<item value="org.eclipse.tm.terminal.view.feature:10.7.0.202204200013"/>
 		<item value="org.eclipse.userstorage:1.2.0.v20210517-0327"/>
 		<item value="org.eclipse.wst.common.fproj:3.7.3.v202111212041"/>
+		<item value="org.eclipse.wst.jsdt.chromium.debug.feature:0.6.300.v202205232338"/>
+		<item value="org.eclipse.wst.jsdt.feature:2.4.200.v202204112136"/>
 		<item value="org.eclipse.wst.json_ui.feature:1.1.10.v202103121626"/>
 		<item value="org.eclipse.wst.web_ui.feature:3.26.0.v202204091445"/>
 		<item value="org.eclipse.wst.xml_ui.feature:3.26.0.v202204091445"/>

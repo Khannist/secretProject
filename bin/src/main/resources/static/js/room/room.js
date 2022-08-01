@@ -7,27 +7,61 @@ window.onload = function(){
 	createRoom();
 }
 
-function getRoom(){
-	var msg = { userId : $('#userId').val()	};
+function getRoom(res){
+	console.log("res.channelCode = " + res.channelCode);
+	var msg = { 
+		
+		userId : $('#userId').val(),
+		channelCode : res.channelCode
+			};
 	commonAjax('/getRoom', msg , 'post', function(result){
 		createChatingRoom(result);
 	});
 }
 
+function enterKey() {
+	console.log("엔터입력");
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    	console.log("눌린 엔터");
+    	var con = document.getElementById("inputNameSpace");
+    	if(con.style.display == 'inline-block'){
+    		console.log("반응없는곳 찾기");
+    		createRoomName();
+			console.log("반응이있나?");
+		}
+    	
+    		
+    }
+}
+
 function createRoom(){
-	$("#createRoom").click(function(){
-		var msg = {	
-			roomName : $('#roomName').val(),
+	console.log("1번");
+	$("#addViewRoom").click(function(){
+		console.log("2번");
+		var con = document.getElementById("inputNameSpace");
+		console.log("3번");
+		con.style.display = (con.style.display != 'none') ? "none" : "inline-block";
+		console.log("4번");
+		
+	});
+}
+
+
+function createRoomName() {
+	var msg = {
+			channelCode : $('#channelCode').val(),	
+			roomName : $('input#roomName').val(),
 			userId : $('#userId').val()	
 			};
-
+		console.log("msg = " +JSON.stringify(msg));
 		commonAjax('/createRoom', msg, 'post', function(result){
 			createChatingRoom(result);
 		});
 
-		$("#roomName").val("");
-	});
+		$("input#roomName").val("");
 }
+
 
 function goRoom(code, name){
 	location.href="/moveChating?roomName="+name+"&"+"roomCode="+code;
@@ -35,13 +69,17 @@ function goRoom(code, name){
 
 function createChatingRoom(res){
 	if(res != null){
-		var tag = "<tr><th class='num'>순서</th><th class='room'>방 이름</th><th class='go'></th></tr>";
-		res.forEach(function(d, idx){
-			var rn = d.roomName.trim();
+		console.log("res = " + JSON.stringify(res));
+		console.log("res.list = " + res.list);
+		console.log("res[0] = " + res[0]);
+		console.log("res.list[0].userId = " + res.list[0].userId);
+		var tag = "";
+		res.list.forEach(function(d, idx){
+			var rn = d.roomName;
 			console.log("d.roomCode = " + d.roomCode);
 			tag += "<li>"+
 						"<p class='go' value='"+d.roomCode+"'>"+
-							"<a onclick='goRoom(\""+d.roomCode+"\", \""+rn+"\">" + rn + "</a>" +
+							rn +
 						"</p>"+
 					"</li>";
 		});
@@ -54,8 +92,9 @@ function commonAjax(url, parameter, type, calbak, contentType){
 		url: url,
 		data: parameter,
 		type: type,
-		contentType : contentType!=null?contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+		contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
 		success: function (res) {
+			res = JSON.parse(res);
 			calbak(res);
 		},
 		error : function(err){

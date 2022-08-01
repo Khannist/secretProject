@@ -10,9 +10,11 @@
 <body>
 <div class="container"> 
 		<input type="hidden" name="userId" id="userId" value="${mVo.userId}">
+		<input type="hidden" name="name" id="name" value="${mVo.name}">
 		<input type="hidden" name="channelCode" id="channelCode">
+		<input type="hidden" name="roomCode" id="roomCode">
         <header>
-            <img src="img/superMarch.PNG" alt="로고" id="Logo" onclick="location.href='/MAIN'">
+            <img src="img/superMarch.PNG" alt="로고" id="Logo" onclick="location.href='#'">
             <nav>
                 <ul>
                     <li><p><a href="#">Posting    |   </a></p></li>
@@ -30,9 +32,9 @@
                 <img src="img/changeicon.png" alt="OpenMusic" id="OpenMusic" onclick="PageReconstruction()">
                 <div class="MainChatRoom">메인채팅방</div>
                 <div class="OneToOneChatRoom" style="display: none;">일대일채팅방</div>
-            
+            	<jsp:include page="chat/chat.jsp"></jsp:include>
             </div>
-            <input type="text" name="" id="chatInput" placeholder="채팅인풋칸">
+            <input type="text" name="" id="chatInput" placeholder="보내실 메시지를 입력하세요." onkeyup="send()">
         </div>
         
     </div>
@@ -51,5 +53,6 @@
     </script>
     <script type="text/javascript" src="/js/room/room.js"></script>
     <script type="text/javascript" src="/js/channel/channel.js"></script>
+    <script type="text/javascript" src="/js/chat/chat.js"></script>
 </body>
 </html>

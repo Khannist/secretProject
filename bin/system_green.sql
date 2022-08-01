@@ -102,6 +102,8 @@ CREATE TABLE roomUser_dt (
     CONSTRAINT fk_roomCdeRoomChannel FOREIGN KEY(roomCode) REFERENCES roomChannel(roomCode),
     CONSTRAINT fk_channelcodeHasRoom FOREIGN KEY(channelCode) REFERENCES Channel_dt(channelCode)
 );
+select * from roomUser_dt;
+select * from roomChannel;
 
 drop table roomChannel;
 drop table roomUser_dt;

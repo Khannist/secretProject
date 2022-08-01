@@ -45,32 +45,27 @@ public class MemberController {
 			if(!tempVo.getUserPw().equals(mVo.getUserPw())) {
 				mav.addObject("msg", "로그인에 실패했습니다.");
 			}else {
-				mav.addObject(mVo);
+				mVo.setName(tempVo.getName());
+				mav.addObject("mVo",tempVo);
+				mav.addObject("name", mVo.getName());
 				mav.setViewName("forward:/ServerPage");
 				return mav;
 			}
 		}
+		
 		mav.setViewName("login/loginForm");
 		return mav;
 	}
 	@RequestMapping("/ServerPage")
 	public ModelAndView serverPage(MemberVO mVo) {
 		ModelAndView mav = new ModelAndView();
-if(mVo.getUserId() == null) {
-			
-		}else {
-			mav.addObject("mVo", mVo);
+		if(mVo.getUserId() != null) {
+			MemberVO tempVo = ss.selectOne("ChatMapper.loginCheck", mVo);
+			mav.addObject("mVo", tempVo);
 		}
 		mav.setViewName("/ServerPage");
-		
 		return mav;
 	}
-	
-	@RequestMapping("/friendList")
-	public ModelAndView flt() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/friend/friendList");
-		return mav;
-	}
+
 
 }

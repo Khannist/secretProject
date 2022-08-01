@@ -4,22 +4,11 @@
 	margin:0;
 	padding:0;
 }
-.container{
-	width: 500px;
-	margin: 0 auto;
-	padding: 25px
-}
-.container h1{
-	text-align: left;
-	padding: 5px 5px 5px 15px;
-	color: #FFBB00;
-	border-left: 3px solid #FFBB00;
-	margin-bottom: 20px;
-}
+
 .chating{
-	background-color: #000;
-	width: 500px;
-	height: 500px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 	overflow: auto;
 }
 .chating .me{
@@ -29,11 +18,4 @@
 .chating .others{
 	color: #FFE400;
 	text-align: left;
-}
-input{
-	width: 330px;
-	height: 25px;
-}
-#yourMsg{
-	display: none;
 }
