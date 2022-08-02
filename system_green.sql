@@ -98,7 +98,6 @@ CREATE TABLE roomUser_dt (
     roomName NVARCHAR2(255),
     roomCode nvarchar2(30),
     channelCode NVARCHAR2(28),
-    CONSTRAINT fk_userIdRoomChannerl FOREIGN KEY(userId) REFERENCES user_dt(userId),
     CONSTRAINT fk_roomCdeRoomChannel FOREIGN KEY(roomCode) REFERENCES roomChannel(roomCode),
     CONSTRAINT fk_channelcodeHasRoom FOREIGN KEY(channelCode) REFERENCES Channel_dt(channelCode)
 );
