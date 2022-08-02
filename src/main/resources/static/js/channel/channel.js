@@ -13,14 +13,7 @@ function getChannel(){
 		createChatingChannel(result);
 	});
 }
-function enterkey() {
-	if (window.event.keyCode == 13) {
-    	// 엔터키가 눌렸을 때
-    	var con = document.getElementById("channelNameInput");
-    	if(con.style.display == 'inline-block')
-    		channelCreateName();
-    }
-}
+
 function createServer(){
 	$("#addChannel").click(function(){
 		var con = document.getElementById("channelNameInput");
@@ -36,8 +29,8 @@ function channelCreateName(){
 	commonAjax('/createChannel', msg, 'post', function(result){
 		createChatingChannel(result);
 	});
-	$("div#addChannel").click();
-	$("div#addChannel").click();
+	var con = document.getElementById("channelNameInput");
+	con.style.display = "none";
 	$("input#channelName").val("");
 }
 		

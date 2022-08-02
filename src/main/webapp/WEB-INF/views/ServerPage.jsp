@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <link  rel="stylesheet" type="text/css" href="/css/ServerPageCss.css">
 <title>Insert title here</title>
 </head>
@@ -34,10 +37,15 @@
                 <div class="OneToOneChatRoom" style="display: none;">일대일채팅방</div>
             	<jsp:include page="chat/chat.jsp"></jsp:include>
             </div>
-            <input type="text" name="" id="chatInput" placeholder="보내실 메시지를 입력하세요." onkeyup="send()">
+            <input type="text" name="chatInput" id="chatInput" placeholder="보내실 메시지를 입력하세요." onkeyup="send(event)">
         </div>
         
     </div>
+    
+    
+    
+ 
+    
     <script>
         function showMainChatRoom(){
             document.querySelector('.MainChatRoom').style.display = "block";	// 메인채팅 부분을 화면에 표시
@@ -53,6 +61,7 @@
     </script>
     <script type="text/javascript" src="/js/room/room.js"></script>
     <script type="text/javascript" src="/js/channel/channel.js"></script>
-    <script type="text/javascript" src="/js/chat/chat.js"></script>
+    <script type="text/javascript" src="/js/stomp/stompChat.js"></script>
+    
 </body>
 </html>

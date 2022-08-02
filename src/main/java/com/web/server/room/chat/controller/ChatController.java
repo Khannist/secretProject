@@ -94,16 +94,18 @@ public class ChatController {
 	 */
 	@RequestMapping("/moveChating")
 	public void chating(HttpServletResponse res,Room room)throws Exception {
+		System.out.println("Room = " + room);
 		Gson gson = new Gson();
 		Map<String, Object> data = new HashMap<String, Object>();
 		String roomCode = room.getRoomCode();
-		List<Room> roomList = ss.selectList("ChatMapper.checkSameRoomList", room.getUserId());
+		List<Room> roomList = ss.selectList("ChatMapper.getChatRoom", room);
 		List<Room> new_list = roomList.stream().filter(o->o.getRoomCode().equals(roomCode)).collect(Collectors.toList());
 		if(new_list != null && new_list.size() > 0) {
 			data.put("channelCode", room.getChannelCode());
 			data.put("roomCode", room.getRoomCode());
 		}
 		data.put("userId", room.getUserId());
+		System.out.println("뉴리스트 = " + new_list);
 		System.out.println("무브 룸 데이타 = " + data);
 		res.getWriter().print(gson.toJson(data));
 		

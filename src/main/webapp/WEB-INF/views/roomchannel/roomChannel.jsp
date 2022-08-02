@@ -37,7 +37,8 @@
 		</p>
 	</div>
 	<div id="channelNameInput">
-		<input type="text" name="channelName" id="channelName" onkeyup="enterkey()">
+		<input type="text" name="channelName" id="channelName">
+		<input type="button" name="inputChannelName" id="inputChannelName" onclick="channelCreateName();">
 	</div>
 	
 

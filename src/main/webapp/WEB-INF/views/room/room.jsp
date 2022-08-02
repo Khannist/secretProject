@@ -17,7 +17,8 @@
     	</p>
     </div>
     <div id="inputNameSpace">
-    	<input type="text" name="roomName" id="roomName" onkeyup="enterKey()">
+    	<input type="text" name="roomName" id="roomName">
+    	<input type="button" name="inputRoomName" id="inputRoomName" onclick="createRoomName()">
 	</div>
 	
 </body>
