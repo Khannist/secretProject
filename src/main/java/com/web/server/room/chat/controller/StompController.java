@@ -1,7 +1,13 @@
 package com.web.server.room.chat.controller;
 
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -16,6 +22,9 @@ public class StompController {
 	
 	@Autowired
 	private SimpMessagingTemplate smt;
+	@Autowired
+	private SqlSession ss;
+	
 	
 	@MessageMapping("/chat")
 	@SendTo("/topic/chat")
@@ -24,11 +33,20 @@ public class StompController {
 	}
 	
 	@MessageMapping("/user")
-	public void user(Chat chat){
+	public void user(Chat chat) throws Exception{
 		System.out.println("스톰프 구현단");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		Timestamp tstp = Timestamp.valueOf(sdf.format(now));
+		
+		
+		chat.setChatDate(tstp);
+		
 		System.out.println("chat = " + chat);
+		ss.insert("ChatMapper.chattiing", chat);
 		HashMap<String, Object> payload = new HashMap<>();
-		payload.put("chat", chat);
-		smt.convertAndSend("/topic/a", payload);
+		payload.put("list", chat);
+		smt.convertAndSend("/topic/" + chat.getChannelCode() + "/" + chat.getRoomCode(), payload);
 	}
  }

@@ -11,6 +11,7 @@ public class Chat {
 	private String name; 
 	private String roomCode;
 	private String userId;
-	private Clob chatData;
+	
+	private String chatData;
 	private Timestamp chatDate;
 }

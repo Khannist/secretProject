@@ -7,3 +7,19 @@
 	display: none;
 	
 }
+#connect {
+	position: relative;
+}
+.go {
+	display: inline-block;
+}
+.roomdel {
+	padding: 0;
+	position: absolute;
+	display: inline-block;
+	top: 0;
+	right: 1px;
+	color: white;
+	font-size: 8px;
+	
+}

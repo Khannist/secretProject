@@ -4,7 +4,6 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link  rel="stylesheet" type="text/css" href="/css/room/room.css">
 <meta charset="UTF-8">
 </head>
 <body>
@@ -16,9 +15,9 @@
     		<a>Add</a>
     	</p>
     </div>
-    <div id="inputNameSpace">
+    <div id="inputNameSpace" style="display: none;">
     	<input type="text" name="roomName" id="roomName">
-    	<input type="button" name="inputRoomName" id="inputRoomName" onclick="createRoomName()">
+    	<input type="button" name="inputRoomName" id="inputRoomName" value="입력" onclick="createRoomName()">
 	</div>
 	
 </body>

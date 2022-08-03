@@ -8,6 +8,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <link  rel="stylesheet" type="text/css" href="/css/ServerPageCss.css">
+<link  rel="stylesheet" type="text/css" href="/css/room/room.css">
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -45,7 +47,6 @@
     
     
  
-    
     <script>
         function showMainChatRoom(){
             document.querySelector('.MainChatRoom').style.display = "block";	// 메인채팅 부분을 화면에 표시
@@ -59,6 +60,7 @@
         	 document.querySelector('.MainChatRoom').style.display = "block";
         } */
     </script>
+    <script type="text/javascript" src="/js/event/event.js"></script>
     <script type="text/javascript" src="/js/room/room.js"></script>
     <script type="text/javascript" src="/js/channel/channel.js"></script>
     <script type="text/javascript" src="/js/stomp/stompChat.js"></script>

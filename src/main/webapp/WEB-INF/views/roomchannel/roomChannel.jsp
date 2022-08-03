@@ -31,14 +31,14 @@
 	<ul id="channelSpace">
   
 	</ul>
-	<div class="add">
+	<div class="add" id="addChannel">
 		<p>
-			<a id="addChannel" onclick="createServer()">Add</a>
+			<a id="addChannel">Add</a>
 		</p>
 	</div>
-	<div id="channelNameInput">
+	<div id="channelNameInput" style="display: none;">
 		<input type="text" name="channelName" id="channelName">
-		<input type="button" name="inputChannelName" id="inputChannelName" onclick="channelCreateName();">
+		<input type="button" name="inputChannelName" id="inputChannelName" value="입력" onclick="channelCreateName();">
 	</div>
 	
 

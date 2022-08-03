@@ -58,12 +58,12 @@
  	
  	<insert id="AddChatRoom" parameterType="com.web.server.room.vo.Room">
  		INSERT INTO roomUser_dt
- 		VALUES(#{roomList},#{userId},#{roomName},#{roomCode},#{channelCode})
+ 		VALUES(#{roomList},#{roomName},#{roomCode},#{channelCode})
  	</insert>
  	
  	<select id="getChatRoom" parameterType="com.web.server.room.vo.Room" resultType="com.web.server.room.vo.Room">
  		SELECT * FROM roomUser_dt
- 		WHERE channelCode = #{channelCode} AND userId = #{userId}
+ 		WHERE channelCode = #{channelCode}
  		ORDER BY length(roomList) ASC,roomList ASC
  	</select>
  	
@@ -100,15 +100,17 @@
  	</select>
  	
  	
+ 	<!-- 채팅 쿼리 -->
  	<select id="getChat" parameterType="com.web.server.room.vo.Chat" resultType="com.web.server.room.vo.Chat">
  		SELECT * FROM chat_dt
  		WHERE channelCode = #{channelCode}
  		AND roomCode = #{roomCode}
  	</select>
  	
- 	
- 	
- 	
+ 	<insert id="chattiing" parameterType="com.web.server.room.vo.Chat">
+ 		INSERT INTO chat_dt
+ 		VALUES(#{roomCode}, #{name}, #{userId}, #{channelCode}, #{chatData}, #{chatDate})
+ 	</insert>
  	
  	
  	

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,7 @@ public class ChatController {
 	 */
 	@RequestMapping("/createRoom")
 	public @ResponseBody ModelAndView createRoom(Room room){
+		System.out.println("크리에이트룸 = " + room);
 		ModelAndView mav = new ModelAndView();
 		String roomName = room.getRoomName();
 		if(roomName != null && !roomName.trim().equals("")) {
@@ -79,13 +81,16 @@ public class ChatController {
 	 * @return
 	 */
 	@RequestMapping("/getRoom")
-	public @ResponseBody void getRoom(HttpServletResponse res, Room room) throws Exception{
+	public @ResponseBody void getRoom(HttpServletResponse res, Room room, Model mod) throws Exception{
 		Gson gson = new Gson();
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<Room> list = ss.selectList("ChatMapper.getChatRoom", room);
-		if(list.size() > 0) {
-			data.put("list", list);
+		if(list.size() <= 0) {
+			room.setRoomName("General");
+			System.out.println("겟 룸 채널코드 = " + room);
+			// createRoom으로 값 전달
 		}
+		data.put("list", list);
 		res.getWriter().print(gson.toJson(data));
 	}
 	/**

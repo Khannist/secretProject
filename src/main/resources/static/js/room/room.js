@@ -24,11 +24,9 @@ function getRoom(res){
 }
 
 function createRoom(){
-	$("#addViewRoom").click(function(){
-		var con = document.getElementById("inputNameSpace");
-		con.style.display = (con.style.display != 'none') ? "none" : "inline-block";
-		
-	});
+	var con = document.getElementById("inputNameSpace");
+	con.style.display = (con.style.display != 'none') ? "none" : "inline-block";
+	// $("#addViewRoom").click(function(){});
 }
 
 
@@ -66,7 +64,9 @@ function goRoom(code, id, room){
 	commonAjax('/moveChating', msg , 'post', function(result){
 		getChat(result);
 	});
+	disconnect();
 	connect();
+	$("#chatInput").focus();
 	
 }
 
@@ -81,28 +81,35 @@ function getChat(res) {
 	commonAjax('/getChat', msg , 'post', function(result){
 		createChat(result);
 	});
+	$("#chating").empty();
 }
 
 function createChat(res) {
 	if(res != null){
 		//console.log("res = " + JSON.stringify(res));
-		console.log("res.list = " + res.list);
-		console.log("res[0] = " + res[0]);
-		console.log("res.list[0].userId = " + res.list[0].userId);
-		console.log("res.length = " + res.list[0].roomCode);
+		console.log("반복 출력 테스트");
 		var tag = "";
 		if(res.list.length >= 1) {
-			$("#roomCode").val(res.list[0].roomCode);
-		}
-		res.list.forEach(function(d, idx){
-			console.log("d.roomCode = " + d.roomCode);
-			if(d.userId == $("#userId")){
+			res.list.forEach(function(d, idx){
+				console.log("d.roomCode = " + d.roomCode);
+				if(d.userId == $("#userId").val()){
+					tag +=  "<p class='me'>나 :" + d.chatData + "</p>";
+				}else {
+					tag += "<p class='others'>" + d.name + " :" + d.chatData + "</p>";
+				}
+			});			
+		}else {
+			console.log("길이가 0 인 리스트");
+			var d = res.list;
+			if(d.userId == $("#userId").val()){
 				tag +=  "<p class='me'>나 :" + d.chatData + "</p>";
 			}else {
 				tag += "<p class='others'>" + d.name + " :" + d.chatData + "</p>";
 			}
-		});
-		$("#chating").empty().append(tag);
+		}
+		$("#chating").append(tag);
+		let chat = document.querySelector('#chating');
+        chat.scrollTop = chat.scrollHeight;		
 	}
 }
 
@@ -111,16 +118,17 @@ function createChatingRoom(res){
 		var tag = "";
 		if(res.list.length >= 1) {
 			$("#roomCode").val(res.list[0].roomCode);
+			res.list.forEach(function(d, idx){
+				var rn = d.roomName;
+				tag += "<li onclick='goRoom(\""+d.channelCode+"\",\""+d.userId+"\",\""+d.roomCode+"\")'" + 
+				"id='connect' name='connect'>"+
+							"<p class='go' value='"+d.roomCode+"'>"+
+								rn +
+							"</p>"+
+							"<span class='roomdel' name='roomdel'>X</span>" + 
+						"</li>";
+			});
 		}
-		res.list.forEach(function(d, idx){
-			var rn = d.roomName;
-			tag += "<li onclick='goRoom(\""+d.channelCode+"\",\""+d.userId+"\",\""+d.roomCode+"\")'" + 
-			"id='connect' name='connect'>"+
-						"<p class='go' value='"+d.roomCode+"'>"+
-							rn +
-						"</p>"+
-					"</li>";
-		});
 		$("#roomList").empty().append(tag);
 	}
 }

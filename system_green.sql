@@ -79,8 +79,17 @@ delete from channel_dt;
 delete from ChannelHasUser_dt;
 
 SELECT * FROM ChannelHasUser_dt
- 		WHERE  userId = 'A'
+ 		WHERE  userId = 'B'
  		ORDER BY length(channelList) ASC,channelList ASC;
+        
+INSERT INTO ChannelHasUser_dt 
+VALUES('B_0', '0YvvzbwR', 'B', 'A11');
+
+INSERT INTO ChannelHasUser_dt 
+VALUES('C_0', '0YvvzbwR', 'C', 'A11');
+
+delete from ChannelHasUser_dt
+WHERE channelCode = '0YvvzbwR' AND userId = 'B';
 
 drop table Channel_dt;
 drop table ChannelHasUser_dt;
@@ -91,10 +100,10 @@ CREATE TABLE roomChannel (
     channelCode NVARCHAR2(30)
 );
 commit;
--- 룸코드를 가지고 있는 유저 테이블
+-- 채널 코드를 가지고 있다면 룸코드는 전부 보이게 만들기
+-- 채널의 관리자는 추가 삭제가 가능하게 변경 or 추가 최대치 제한
 CREATE TABLE roomUser_dt (
     roomList nvarchar2(255),
-    userId nvarchar2(100),
     roomName NVARCHAR2(255),
     roomCode nvarchar2(30),
     channelCode NVARCHAR2(28),
@@ -103,6 +112,8 @@ CREATE TABLE roomUser_dt (
 );
 select * from roomUser_dt;
 select * from roomChannel;
+
+
 
 delete from roomChannel;
 delete from roomUser_dt;
@@ -122,6 +133,9 @@ CREATE TABLE chat_dt (
 );
 commit;
 
+select * from chat_dt;
+
+delete from chat_dt;
 drop table chat_dt;
 
 
