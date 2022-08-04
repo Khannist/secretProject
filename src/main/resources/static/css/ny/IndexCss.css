@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+  /* overflow: hidden; */
+  position: relative;
+  background-image: url(/img/intro_2.jpg);
+  height: 100vh;
+  background-size: cover;
+}
+ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+li{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+p{
+	font-family: 'Archivo Black', sans-serif;
+	font-size: 80px;
+	color: white;
+	font-weight: bold;
+}
+.icon{
+  cursor: pointer;
+  position : absolute;
+  top : 5%;
+  left: 8%;
+  z-index: 4;
+  width : 4%;
+  position: fixed;
+}
+.page{
+  position: relative;
+  top: 40px;
+  height : 100vh;
+  width: 50%;
+  margin: 0 auto;
+  background-size: 100% 100%;
+  background-position: center center;
+  padding-left: 50%;
+  padding-top: 270px;
+}
+.headLine{
+	position: absolute;
+	top: 30%;
+	right: 17%;
+}
+#ToLeft{
+	font-size: 80px;
+  	color: #fff200;
+  	border : none;
+}
+
+#ToLeft:hover{
+	color: #0064FF;
+	font-size: 100px;
+	transition: all 1s;
+}
+
+/*로그인 폼*/
+.form1{
+	  margin: auto;
+	  margin-top: 8%;
+      border: 1px solid black;
+      width: 450px;
+      height: 600px;
+      background-color: white;
+  }
+  form #logoImg{
+      width: 80px;
+      height: 60px;
+      margin-left: 40%;
+      margin-top: 10%;
+      margin-bottom: 12%
+  }
+  form #title{
+      font-weight: bold;
+      margin-left: 12%;
+      margin-bottom: 5%;
+      font-size: 18px;
+  }
+  .form1 ul{
+      list-style: none;
+      margin-left: 12%;
+  }
+  .form1 input{
+      width: 350px;
+      height: 40px;
+  }
+  .form1 #loginPW{
+      margin-top: 20px;
+      margin-bottom: 20px;
+  }
+  .form1 #memo{
+  	  margin-top: 10px;
+      font-size: 12px;
+      width: 250px;
+      height: 50px;
+  }
+  
+  .form1 #spanInus{
+      font-size: 15px;
+      font-weight: bold;
+      color: #ec7f3a;
+      cursor: pointer;
+  }
+  #Tojoin{
+  width: 80px;
+  height: 20px;
+  color: black;
+  cursor: pointer;
+  margin-bottom: 5px;
+  }
+  
+  
+/* 인디케이터 */
+#control { 
+  position: fixed;
+  top: 50%;
+  right: 5%;
+  height: 100%;
+  text-align: center;         
+}
+#control a {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: dodgerblue;                       
+  line-height: 20px;
+  font-size: 0.8em;
+  border-radius: 7.5px;
+  margin-top: 8px;
+}
+#control a.on {
+  background: #f6f5f5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

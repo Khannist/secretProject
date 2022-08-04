@@ -32,7 +32,7 @@ function createChat(res) {
 				tag += "<p class='others'>" + d.name + " :" + d.chatData + "</p>";
 			}
 		});
-		$("#chating").empty().append(tag);
+		$("#ChatInput").empty().append(tag);
 	}
 }
 

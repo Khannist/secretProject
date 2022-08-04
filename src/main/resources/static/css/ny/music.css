@@ -1,0 +1,146 @@
+@charset "UTF-8";
+* {
+  /* box-sizing: border-box; */
+  margin: 0;
+  padding: 0;
+}
+ul{
+	list-style: none;
+}
+img{
+	cursor: pointer;
+}
+body {
+/*   background: #111; */
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+/*플레이리스트*/
+
+/* .playmusicPart {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.cards {
+  position: absolute;
+  width: 14rem;
+  height: 18rem;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+/*#box{
+	border: 1px solid black; 
+}
+.cards li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 14rem;
+  height: 18rem;
+  text-align: center;
+  line-height: 18rem;
+  font-size: 2rem;
+  font-family: sans-serif;
+  background-color: #9d7cce;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0.8rem;
+}*/
+
+/* 음악 재생 일시정지 넘기기*/
+
+/*비디오 재생 */
+
+#ifrmaeID{
+	display: none;
+	float:left;
+}
+
+
+/* 음악 추천리스트 큰 div */
+.RecommandPlayList{
+	float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TOP100 추천리스트*/
+.RecommandPlayList{
+	margin-left: 10px;
+}
+
+
+.RecommandPlayList li{
+	float: left;
+	margin-right: 20px;
+} 
+.RecommandPlayList img{
+	width: 120px;
+	height: 120px;
+}
+.RecommandUL p{
+	font-size: 12px;
+}
+.keywordList{
+	margin-top: 20px;
+}
+/* 키워드 추천리스트 */
+
+/* .KeywordRecommand{
+	clear: both;
+}
+.KeywordRecommand li{  나중에 이거 지우고 .RecommandPlayList li로 한번에
+	float: left;
+	margin-left: 20px;
+} */
+
+/* [음악 추천리스트] top100 추천리스트*/
+.top100List{
+	float:left;
+}
+/* [음악 추천리스트] 키워드 추천리스트*/
+.keywordList{
+	clear: both;
+	float: left;
+}
+
+.AloneLoveList, .ChalipothList, .AppleList, .AniOstList, .ExerciseList, .leaveworkList{
+	display: none;
+}
+
+.keywordList ul li img{
+	width: 120px;
+	height: 120px;
+}
+
+.keywordList ul{
+	/* 가로 스크롤 */
+  overflow: auto;
+  white-space: nowrap;
+	
+}
+/*.keywordList ul::-webkit-scrollbar{
+    display: none; 
+}*/
+
+
+
+
+
+

@@ -78,6 +78,10 @@
  		SELECT channelCode FROM channel_dt
  		WHERE channelCode = #{channelCode}
  	</select>
+ 	<select id="selectChannelDt" parameterType="String" resultType="com.web.server.room.vo.Channel">
+ 		SELECT * FROM channel_dt
+ 		WHERE channelCode = #{channelCode}
+ 	</select>
  	<select id="checkSameChannelList" parameterType="com.web.server.room.vo.Channel" resultType="com.web.server.room.vo.Channel">
  		SELECT channelList
  		FROM ChannelHasUser_dt

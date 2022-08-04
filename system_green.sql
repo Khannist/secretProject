@@ -114,7 +114,6 @@ select * from roomUser_dt;
 select * from roomChannel;
 
 
-
 delete from roomChannel;
 delete from roomUser_dt;
 

@@ -4,7 +4,7 @@
  var ws;
 window.onload = function() {
 	getChannel();
-	createServer();
+	createServer()
 }
 
 function getChannel(){
@@ -36,12 +36,13 @@ function channelCreateName(){
 		
 
 
-function goChannel(code, name, id, list){
+function goChannel(code, name, id){
 	$("#roomList").empty();
 	var msg = {
 		channelCode : code,
 		channelName : name,
-		userId : id
+		userId : id,
+		roomNumber : "1"
 	}
 	
 	//location.href="/moveRoom?channelName="+name+"&"+"channelCode="+code+"&userId="+id;
@@ -51,25 +52,29 @@ function goChannel(code, name, id, list){
 	commonAjax('/moveRoom', msg, 'post', function(result){
 		getRoom(result);
 	});
-	$("#"+list).css({
-		"color" : "blue"
-	});
 	
 }
 
 function createChatingChannel(res){
 	if(res != null){
 		var tag = "";
-		res.list.forEach(function(d, idx){
-			var cn = d.channelName;
-			tag += "<li onclick='goChannel(\""+d.channelCode+"\", \""+cn+"\",\""+d.userId+"\",\""+d.channelList+"\")' "+
-			" oncontextmenu='channelEvent(event)' name='"+ d.channelList +"'>"+
-						"<p type='hidden' name='hiddenChannelCode' value='"+d.channelCode+"'>"+
-							"<img src='' alt='' id='channelName' name='channelName'>"+ cn + "</img>" + 
-						"</p>" +
-					"</li>";	
-		});
-		$("#channelSpace").empty().append(tag);
+		if(res.list) {
+			res.list.forEach(function(d, idx){
+				console.log("채널 코드 생성");
+				$("#channelCode").val(d.channelCode);
+				var cn = d.channelName;
+				tag += "<li onclick='goChannel(\""+d.channelCode+"\", \""+cn+"\",\""+d.userId+"\",\""+d.channelList+"\")' "+
+				" oncontextmenu='channelEvent(event)' name='"+ d.channelList +"'>"+
+							"<p type='hidden' name='hiddenChannelCode' value='"+d.channelCode+"'>"+
+								"<img class='serverImg' src='https://source.unsplash.com/random'>"+
+							"</p>" +
+						"</li>";
+			});
+			console.log("룸코드 생성 검증");
+			checkRoom(res);
+			
+			$("#channelSpace").empty().append(tag);			
+		}
 	}
 }
 

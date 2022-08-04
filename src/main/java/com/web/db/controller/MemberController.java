@@ -63,7 +63,7 @@ public class MemberController {
 			MemberVO tempVo = ss.selectOne("ChatMapper.loginCheck", mVo);
 			mav.addObject("mVo", tempVo);
 		}
-		mav.setViewName("/ServerPage");
+		mav.setViewName("/ny/ServerPage");
 		return mav;
 	}
 

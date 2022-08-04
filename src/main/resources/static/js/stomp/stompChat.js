@@ -19,13 +19,9 @@ function connect() {
 		});
 	});
 	
-	
-	
 }
-function send(e) {
-	console.log("e = " + JSON.stringify(e));
-	if(e.keyCode == 13){
-		if($("input#chatInput").val() == null || $("input#chatInput").val() == "") {
+function sendChatSc() {
+	if($("input#chatRealInput").val() == null || $("input#chatRealInput").val() == "") {
 			console.log("빈값");
 		}else {
 			console.log("sending");
@@ -34,14 +30,20 @@ function send(e) {
 				'userId' : $("#userId").val(),
 				'roomCode' : $("#roomCode").val(),
 				'channelCode' : $("#channelCode").val(),
-				'chatData' : $("input#chatInput").val()
+				'chatData' : $("input#chatRealInput").val()
 			};
 			console.log("msg = " + msg);
 			stompClient.send("/app/user", {}, JSON.stringify(msg));
-			$("#chatInput").val("");
+			$("#chatRealInput").val("");
 			
 		}
-		$("#chatInput").focus();
+		$("#chatRealInput").focus();
+}
+function send(e) {
+
+	console.log("e = " + JSON.stringify(e));
+	if(e.keyCode == 13){
+		sendChatSc();
 	}
 }
 

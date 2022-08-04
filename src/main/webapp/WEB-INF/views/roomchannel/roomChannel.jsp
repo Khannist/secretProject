@@ -33,7 +33,9 @@
 	</ul>
 	<div class="add" id="addChannel">
 		<p>
-			<a id="addChannel">Add</a>
+			<a id="addChannel">
+				<img class="serverImg" id="plusServerImg" src="img/icon/plus2.png">
+			</a>
 		</p>
 	</div>
 	<div id="channelNameInput" style="display: none;">

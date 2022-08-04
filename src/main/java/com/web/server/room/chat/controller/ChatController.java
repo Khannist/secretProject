@@ -15,6 +15,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,7 +38,6 @@ public class ChatController {
 	 */
 	@RequestMapping("/createRoom")
 	public @ResponseBody ModelAndView createRoom(Room room){
-		System.out.println("크리에이트룸 = " + room);
 		ModelAndView mav = new ModelAndView();
 		String roomName = room.getRoomName();
 		if(roomName != null && !roomName.trim().equals("")) {
@@ -65,6 +65,8 @@ public class ChatController {
 				}				
 			}
 			room.setRoomList(room.getChannelCode()+"_"+num);
+			System.out.println();
+			System.out.println();
 			ss.insert("ChatMapper.AddChatRoom", room);
 			mav.addObject("room", room);
 			
@@ -81,16 +83,14 @@ public class ChatController {
 	 * @return
 	 */
 	@RequestMapping("/getRoom")
-	public @ResponseBody void getRoom(HttpServletResponse res, Room room, Model mod) throws Exception{
+	public @ResponseBody void getRoom(HttpServletResponse res, Room room) throws Exception{
 		Gson gson = new Gson();
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<Room> list = ss.selectList("ChatMapper.getChatRoom", room);
-		if(list.size() <= 0) {
-			room.setRoomName("General");
-			System.out.println("겟 룸 채널코드 = " + room);
-			// createRoom으로 값 전달
+		// channel_dt 테이블 조회후 채널이름 데이터 가져와서 서버이름에 삽입
+		if(list.size() > 0) {
+			data.put("list", list);
 		}
-		data.put("list", list);
 		res.getWriter().print(gson.toJson(data));
 	}
 	/**
@@ -99,23 +99,37 @@ public class ChatController {
 	 */
 	@RequestMapping("/moveChating")
 	public void chating(HttpServletResponse res,Room room)throws Exception {
-		System.out.println("Room = " + room);
 		Gson gson = new Gson();
 		Map<String, Object> data = new HashMap<String, Object>();
 		String roomCode = room.getRoomCode();
 		List<Room> roomList = ss.selectList("ChatMapper.getChatRoom", room);
 		List<Room> new_list = roomList.stream().filter(o->o.getRoomCode().equals(roomCode)).collect(Collectors.toList());
 		if(new_list != null && new_list.size() > 0) {
+			
 			data.put("channelCode", room.getChannelCode());
 			data.put("roomCode", room.getRoomCode());
 		}
 		data.put("userId", room.getUserId());
-		System.out.println("뉴리스트 = " + new_list);
-		System.out.println("무브 룸 데이타 = " + data);
 		res.getWriter().print(gson.toJson(data));
 		
 	}
 
+	/*
+	 * 룸체크
+	 * 
+	 */
+	@RequestMapping("/checkRoom")
+	public void checkRoom(HttpServletResponse res,Room room)throws Exception{
+		Gson gson = new Gson();
+		Map<String, Object> data = new HashMap<String, Object>();
+		String msg = "yes";
+		List<Room> list = ss.selectList("ChatMapper.getChatRoom", room);
+		if(list.size() > 0) {
+			msg = "no";
+		}
+		data.put("msg", msg);
+		res.getWriter().print(gson.toJson(data));
+	}
 
 	/*
 	 * 채널 생성
@@ -185,19 +199,29 @@ public class ChatController {
 	 * @return
 	 */
 	@RequestMapping("/moveRoom")
-	public void moveRoom(HttpServletResponse res, Channel chn)throws Exception {
+	public void moveRoom(HttpServletResponse res, Channel chn,@RequestParam HashMap<Object, Object> params)throws Exception {
 		Gson gson = new Gson();
 		Map<String, Object> data = new HashMap<String, Object>();
+		System.out.println("호");
+		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
+		System.out.println("roomnum = " + roomNumber);
 		String channelCode = chn.getChannelCode();
+		
 		List<Channel> chnList = ss.selectList("ChatMapper.getChatChannel", chn.getUserId());
 		List<Channel> new_list = chnList.stream().filter(o->o.getChannelCode().equals(channelCode)).collect(Collectors.toList());
 		if(new_list != null && new_list.size() > 0) {
 			data.put("channelName", chn.getChannelName());
 			data.put("channelCode", chn.getChannelCode());
+			data.put("roomNumber", roomNumber);
 		}else {
 			data.put("userId", chn.getUserId());
+			
 		}
 		
+		System.out.println();
+		System.out.println();
+		System.out.println("data = " + data);
+		System.out.println();
 		res.getWriter().print(gson.toJson(data));
 	}
 	

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+ul{
+	list-style: none;
+}
+img{
+	cursor: pointer;
+}
+body {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+.SearchInput{
+	width: 50%;
+	height: 30px;
+}
+#search_Input{
+	width: 600px;
+}
+#search_Button{
+	width: 120px;
+}
+
+.th{
+    float: left;
+    width: 95px;
+	height: 60px;
+}
+.title{
+    float: left;
+    font-size: 13px;
+    font-weight: lighter;
+
+}
+.liclass{
+    clear: both;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

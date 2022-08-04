@@ -1,0 +1,412 @@
+@charset "UTF-8";
+*{padding: 0; margin: 0;}
+ul{list-style: none;}
+a{text-decoration: none; cursor: pointer;}
+li{list-style: none;}
+p{
+	font-family: 'Archivo Black', sans-serif;
+	font-size: 20px;
+} 
+body{
+	width: 100%;
+	height: 100vh;
+	background-color: #37393f;
+}  
+
+
+     header{
+         background-color: #202225;
+         width: 100%;
+         height: 3vh;
+     }
+     #logo{
+     	margin-top:3px;
+         margin-left: 10px;
+         width: 23px;
+         /*height:*/
+         float: left;
+         cursor: pointer;
+     } 
+     header #ToProfile{
+	     float:right;
+	     width: 30px;
+	     /*height: 30px;*/
+	     margin-right: 1.5%;
+     }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    .Lbar{
+    	clear: both;
+   		float: left;
+   		width: 16%;
+   		height: 97vh;
+   		border: 0.1px;
+    	border-top-left-radius: 19px;
+    	border-top-right-radius: 19px;
+    }
+    .ServerList{
+     	width: 27%;
+     	height: 97vh;
+    	background-color: #202225;
+    	float: left;
+    }
+    #serverCount{
+    	margin-left: 15px;
+    	margin-top: 18px;
+    	font-size: 50px;
+    	width: 46px;
+    	height: 46px;
+    }
+    
+
+    .serverImg{
+    	width: 46px;
+    	height: 46px;
+    	border: 2px solid white;
+    	border-radius: 50%;
+   	}
+    .serverImg:hover{
+    	border-radius: 20%;
+    }
+    
+    .ChatAndFriendList{
+     	width: 73%;
+     	height: 97vh;
+    	background-color: #2f3136;
+    	float: left;
+    	position: relative;
+    }
+    
+    
+    .chatAndFriendheader{
+    	color: white;
+    	text-align:left;
+    	width: 99%;
+    	height:40px;
+    	border: 1px solid #202225;
+    	border-top-left-radius: 19px;
+    	border-top-right-radius: 19px;
+    	
+    }
+    #ChatName, #FriendName{
+    	font-size: 20px;
+    	margin-top: 10px;
+    	margin-left: 10px;
+    }
+    
+    .ChatAndFriend_Icon{
+    	position:absolute;
+    	right: 5px;
+    	top:19px;
+    	width: 14px;
+    }
+    
+    
+    
+    .chatAndFriendheader ul li img{
+    	width: 30px;
+    	height:30px;
+    	float: left;
+    	border: 1px;
+    	border-radius: 50%;
+    }
+    
+    .chatAndFriendheader li p{
+    	font-size: 15.5px;
+    	float: left;
+    	margin-top: 9px;
+    	margin-left: 5px;
+    	cursor: pointer;
+    }
+    
+    .chatAndFriendheader li {
+    	clear: both;
+    }
+    
+    
+    /*친구리스트*/
+    .FriendList{
+    	display: none;
+    }
+
+    
+    
+    
+    
+    /*프로필 하단 고정*/
+    .fixProifle{
+    	width: 100%;
+    	height: 43px;
+    	position: absolute;
+    	bottom: 3px;
+    	background-color: #292b2f;
+    }
+    .fixProifle img{
+    	width: 34px;
+    	height: 34px;
+    	border: 1px;
+    	border-radius: 50%;
+    	margin-top:3px;
+    	margin-right: 9px;
+    	margin-left: 7px;
+    }
+    #fixProfile_1, #fixProfile_2{
+    	float: left;
+    	font-size: 13px;
+    }
+    #fixProfile_2 span{
+    	font-size: 10px;
+    }
+    .fixProifle #setIcon{
+    	width: 29px;
+    	height: 29px;
+    	float: right;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     .Midbar{
+     	 width: 84%;
+         height: 97vh;
+         float: right;
+         background-color: #37393f; 
+    }
+    .ChatPage{
+    	position: relative;
+    	float:right;
+    	width: 100%;
+     	height: 97vh;
+     	
+     	
+    }
+    .pageIcon{
+    	position:absolute;
+    	top:330px;
+    	width: 35px;
+    }
+    #CloseMusic{
+    	display: none;
+    }
+    .MusicPage, .MusicSearch{
+    	display: none;
+    	width: 50%;
+     	height: 97vh;
+     	float: left;
+     	
+    }
+    
+    /*ChatPage*/
+    
+    .ChatPage{
+    	position: relative;
+    }
+    .ChatInput{
+   	    position: absolute;
+    	bottom: 3px;
+    	margin: auto;
+    	width: 90%;
+    	height: 42px;
+    	border: 1px solid #202225;
+    	border-radius: 12px;
+    	background-color: #40444b;
+    }
+    
+    #chatRealInput, #chatRealsubmit{
+    	border: none;
+    	background-color: #40444b;
+    }
+    
+    .ChatInput #chatRealInput{
+    	margin-top:5px;
+    	margin-left:20px;
+    	width: 85%;
+    	height: 30px;
+    }
+    
+    .ChatInput img{
+    	float: right;
+    	width: 27px;
+    	height: 27px;
+    	margin-top: 7px;
+    	margin-right: 12px;
+    }
+    .ChatSubmit{
+    	position: absolute;
+    	bottom: 3px;
+    	right:6px;
+    	margin-top:5px;
+    	margin-left:20px;
+    	width: 9.2%;
+    	height: 42px;
+    	border: 1px solid #202225;
+    	border-radius: 12px;
+    }
+    
+    
+    #chatRealsubmit{
+    	width: 100%;
+    	height: 42px;
+    	border: 1px;
+    	border-radius: 12px;
+		color: #a0a2a5;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* 음악페이지*/
+    .MusicPage{
+    	position: relative;
+    	
+    }
+    .ToIMG{
+	width: 35px;
+	position: absolute;
+	right: 10px;
+	top: 3px;
+	}
+
+
+	.firstvideo, #ifrmaeID{
+		margin-top:50px;
+		margin-left: 60px;
+		float:left;
+	}
+	.iframeClass{
+		display: none;
+		margin-top:50px;
+		margin-left: 110px;
+		float:left;
+	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	/* 음악 추천리스트 큰 div */
+	.RecommandPlayList{
+		margin-left: 15px;
+	}
+
+	.RecommandPlayList li{
+		float: left;
+		margin-right: 20px;
+	} 
+	.RecommandPlayList img{
+		width: 120px;
+	}
+	.Command{	/*각 테마 위에 텍스트*/
+		color: white;
+		font-size: 25px;
+		font-weight: bold;
+		margin-bottom: 9px;
+	}
+	
+
+	
+	
+	
+
+
+	/* [음악 추천리스트] top100 추천리스트*/
+	.top100List{
+		float:left;
+	}
+	#top100_Title{
+		margin-top: 10px;
+	}
+	
+	.top100List li p{
+		font-size: 15px;
+		color: white;
+	}
+	
+	
+	
+	
+	/* [음악 추천리스트] 키워드 추천리스트*/
+	.keywordList{
+		clear: both;
+		float: left;
+	}
+
+    .keywordList{
+		margin-top: 30px;
+	}
+	.keyword_Text{
+		margin-bottom: 15px;
+	}
+	.keywordList li p{
+		font-size: 12px;
+		color: white;
+	}
+	.keywordList li span{
+		font-size: 16px;
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* [음악 검색] */
+    .MusicSearch{
+   		background-color: green;
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

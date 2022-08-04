@@ -1,0 +1,161 @@
+* {
+  /* box-sizing: border-box; */
+}
+body{
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+}
+li{
+  list-style: none;
+}
+ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+a{
+  text-decoration: none;
+}
+p{
+	font-family: 'Merienda One', cursive;
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.icon{
+  position : fixed;
+  z-index: 4;
+  width : 25px;
+}
+
+
+#instagram{
+  left: 28px;
+  opacity: 0;
+  margin-top : calc(50vh);
+}
+
+.menuButton{
+  position : fixed;
+  z-index: 3;
+  width: 100px;
+  height: 40px;
+  padding: 20px;
+  left : calc(100% - 139px);
+  top : -50px;
+}
+
+.menuButton:hover{
+  cursor: pointer;
+}
+.menuBtnUpLine{
+  border-top: 3px solid white;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.menuBtnBottomLine{
+  margin-left: auto;
+  border-top: 4px solid white;
+  width: 50%;
+}
+.menu{
+  width: 100%;
+  height: 100vh;
+
+  background-color: black;
+  z-index: 2;
+
+  left:200vh;
+
+  position: fixed;
+}
+
+.menuUpLine{
+  border-top: 1px solid white;
+  width: 100%;
+
+  margin-bottom: 40px;
+}
+.menuRight{
+  width: 50%;
+  height: 100%;
+  padding: 400px 0 0 200px;
+
+  float: left;
+}
+.menuRightBox{
+  width: 400px;
+  height: 400px;
+}
+.menuRightText{
+  color : white;
+  margin: 0;
+}
+
+#page1{
+  background-image: url(/img/intro_2.jpg);
+
+}
+#page2{
+  background-image: url(/img/intro_4.jpg);
+}
+
+
+.page{
+  height : 100vh;
+  width: 100%;
+  margin: 0 auto;
+  background-size: 100% 100%;
+  background-position: center center;
+  padding-left: 50%;
+  padding-top: 270px;
+}
+
+.headLine{
+  font-family: 'Archivo Black', sans-serif;
+  color: white;
+  font-size: 72px;
+    font-weight:bold;
+  margin: 0;
+
+  position: relative;
+  top: 40px;
+  opacity: 0;
+}
+
+.bdText{
+  color: dodgerblue;
+}
+
+.bdText:hover{
+	color: #0064FF;
+	font-size: 80px;
+	transition: all 1s;
+}
+
+
+/* 인디케이터 */
+
+#control { 
+  position: fixed;
+  top: 50%;
+  right: 5%;
+  height: 100%;
+  text-align: center;         
+}
+#control a {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: dodgerblue;                       
+  line-height: 20px;
+  font-size: 0.8em;
+  border-radius: 7.5px;
+  margin-top: 8px;
+}
+
+#control a.on {
+  background: #f6f5f5;
+}
+
+

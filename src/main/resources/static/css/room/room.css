@@ -5,7 +5,29 @@
 }
 #inputNameSpace {
 	display: none;
+	position: fixed;
+	background-color: none;
+	left: 16%;
+	top: 40px;
+	border: 1px solid white;
+	width: 202px;
+	z-index: 10;
 	
+}
+#inputNameSpace p {
+	color: white;
+	text-align: center;
+	
+}
+#inputNameSpace #roomName {
+	padding-top: 10px;
+	width: 200px;
+	height: 40px;
+}
+#inputNameSpace #inputRoomName {
+	padding-top: 10px;
+	width: 204px;
+	height: 40px;
 }
 #connect {
 	position: relative;
